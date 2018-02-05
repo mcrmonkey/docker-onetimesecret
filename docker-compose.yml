@@ -1,0 +1,21 @@
+services:
+  ots:
+    container_name: ots
+    depends_on:
+    - redis
+    deploy:
+      restart_policy:
+        condition: any
+    image: mcrmonkey/docker-onetimesecret
+    links:
+    - redis
+    ports:
+    - 7143:7143/tcp
+  redis:
+    command: redis-server --appendonly yes
+    container_name: redis
+    deploy:
+      restart_policy:
+        condition: any
+    image: redis:latest
+version: '3.0'
