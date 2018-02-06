@@ -50,3 +50,7 @@ Access it through your browser at `http://localhost:7143`
   docker volume option.
 
 
+### Credit
+
+Some of the configuration and inspiration for this came from https://github.com/carlasouza/docker-onetimesecret
+
