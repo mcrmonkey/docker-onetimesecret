@@ -3,10 +3,9 @@
 FROM alpine:latest as PKGGET
 RUN apk --no-cache add zip
 
-ADD https://github.com/onetimesecret/onetimesecret/archive/master.zip /tmp/onetime.zip
+ADD https://github.com/onetimesecret/onetimesecret/archive/refs/heads/main.zip /tmp/onetime.zip
 
 RUN /usr/bin/unzip /tmp/onetime.zip -d /extract/
-
 
 
 
@@ -26,8 +25,9 @@ RUN adduser ots -h /var/lib/onetime -D && \
 
 
 RUN apk --no-cache --virtual .build-deps add build-base && \
+    bundle update && \
 	bundle install --frozen --deployment --without=dev && \
-    bin/ots init && \
+	bin/ots init && \
 	apk del .build-deps
 
 ADD config/config /etc/onetime/config
